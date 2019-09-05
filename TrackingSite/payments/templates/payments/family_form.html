@@ -1,0 +1,12 @@
+{% extends 'payments/base.html' %}
+{% block content %}
+<div class="container">
+        <form method="post">{% csrf_token %}
+                {{ form.media.css }}
+                {{ form.media.js }}
+                {{ form.as_p }}
+                <input type="submit" value="Save">
+            </form>
+</div>
+{% endblock %}
+

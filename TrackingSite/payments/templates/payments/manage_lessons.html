@@ -1,0 +1,19 @@
+{% extends 'payments/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+        <form method="post">             
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {% csrf_token %}
+                    {{ form.media.css }}
+                    {{ form.media.js }}                                      
+                    {{ form.as_p }}                                                  
+                {% endfor %}
+                <input type="submit" value="Update">
+            </form>            
+</div>
+{% endblock %}
+
+

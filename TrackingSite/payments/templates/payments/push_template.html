@@ -1,0 +1,11 @@
+{% extends 'payments/base.html' %}
+{% load webpush_notifications %}
+
+{% block header %}
+    {% webpush_header %}
+{% endblock %}        
+
+{% block content %}
+    <p> Please subscribe to get Push Notifications </p>    
+    {% webpush_button %}
+{% endblock %}

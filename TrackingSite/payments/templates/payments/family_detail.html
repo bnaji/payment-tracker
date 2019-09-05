@@ -1,0 +1,48 @@
+{% extends 'payments/base.html' %}
+{% block content %}
+<div class="container">
+  <h1>{{ object }}</h1>
+  <p>
+    Balance: {{ object.balance }}
+    <br>
+    Charging: {{ object.price }}
+    <br>
+    Lessons on {{ object.starting_date|date:"l"}} at {{ object.starting_date|time:"g:i a" }}
+    <br>
+    Location: {{ object.address }}
+  </p>
+
+
+  <h2>Lessons</h2>
+  <a href="{% url 'payments:lessons' object.id %}">Change lesson Status</a>
+  <ol>
+    {% for lesson in page_obj %}
+    <li>{{ lesson }}</li>
+    {% endfor %}
+  </ol>
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+        Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">next</a>
+      {% endif %}
+    </span>
+  </div>
+
+
+  <p>
+    <a href="{% url 'payments:family-update' object.id %}">Update</a>
+    <br>
+    <a href="{% url 'payments:family-delete' object.id %}">Delete</a> (Cannot be undone!)
+  </p>
+
+</div>
+{% endblock %}

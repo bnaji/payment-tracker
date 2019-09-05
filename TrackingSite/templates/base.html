@@ -1,0 +1,86 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags for Bootstrap 4 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Key for Push Notifications-->
+    <meta name="vapid-key" content="{{ vapid_key }}">
+    {% if user.id %}
+        <meta name="user_id" content="{{ user.id }}">
+    {% endif %}
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Custom CSS to tweak Bootstrap 4 -->
+    <link href="{% static '/css/styles.css' %}" rel="stylesheet">
+    <title>Payment Tracker</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'payments:index' %}">Payment Tracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+              
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'payments:index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'payments:family' %}">Families</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#"">Disabled</a>
+                </li> -->
+                
+            </ul>
+            <!-- Change to Login/Logout -->
+            {% if user.is_authenticated %}
+                <div class="navbar-text">
+                    Hello, {{ user.username }}!                    
+                    <small> 
+                        <a href="{% url 'logout' %}" class="text-secondary">logout</a>
+                    </small>
+                </div>    
+                    
+            {% else %}
+            <!-- <div class="login-container">
+                {% csrf_token %}
+                <form action="{% url 'login' %}">
+                  <input type="text" placeholder="Username" name="username">
+                  <input type="password" placeholder="Password" name="psw">
+                  <button type="submit">Login</button>
+                </form>
+              </div>  -->
+                <div class="navbar-text">                                   
+                    <a href="{% url 'login' %}">Login</a>
+                    <a> | </a>
+                    <small>
+                        <a href="{% url 'payments:signup' %}" class="font-weight-light">Register</a>
+                    </small>
+                </div>  
+            {% endif %}
+            
+        </div>
+    </nav>
+              
+   
+    {% block content %}
+        <!-- Extended content goes here! -->
+    {% endblock content %}
+
+
+    <!-- Bootstrap 4 JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
+    
+

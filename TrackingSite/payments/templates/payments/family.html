@@ -1,0 +1,26 @@
+{% extends 'payments/base.html' %}
+{% block content %}
+<div class="container"><h1>Family</h1>
+
+
+
+    <a href="{% url 'payments:family-add' %}">Add new Family</a>
+    <ul>
+    {% for family in object_list %}
+        <li>
+            <p>
+                {{ family }}: 
+                <a href="{% url 'payments:family-detail' family.id %}">View</a> 
+                <a href="{% url 'payments:family-update' family.id %}">Update</a> 
+                <a href="{% url 'payments:family-delete' family.id %}">Delete</a>
+            </p>
+        </li>
+        
+        
+    {% empty %}
+        <li>No familys yet.</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
